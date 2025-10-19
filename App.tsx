@@ -1,25 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Text, View } from 'react-native';
 
 const App = () => {
-  let data = 22;
-  const fruit = (val: string) => {
-    data = 20;
-    console.log(data);
-    // console.log(val);
-    // console.log('Fruit Function Pressed');
-    // console.warn('Fruit Function Pressed');
+  const [create, setCreate] = useState('John Doe');
+  let data = 'Sam Johnson';
+
+  const testUpdate = () => {
+    setCreate('Jane Smith Olsen');
+    // data = 'Michael Brown';
   };
+
   return (
     <View>
-      <Text style={{ color: 'blue', fontSize: 40 }}>Components</Text>
-      <Text style={{ color: 'orange', fontSize: 40 }}>{data}</Text>
-      <Button
-        title="Go to Company Data"
-        color={'brown'}
-        onPress={() => fruit('1st Button Called')}
-      />
-      <Button title="Check In" color={'green'} onPress={() => fruit('Hello')} />
+      <Text style={{ color: 'blue', fontSize: 40 }}>{create}</Text>
+      <Text style={{ color: 'brown', fontSize: 40 }}>{data}</Text>
+
+      <Button title="Update The State!" onPress={testUpdate} />
     </View>
   );
 };
