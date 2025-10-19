@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
-import { Button, Text, View } from 'react-native';
+import React from 'react';
+import { Text, View } from 'react-native';
 
 const App = () => {
-  const [create, setCreate] = useState('John Doe');
-  let data = 'Sam Johnson';
-
-  const testUpdate = () => {
-    setCreate('Jane Smith Olsen');
-    // data = 'Michael Brown';
-  };
-
+  let name = 'Bruce Wayne';
   return (
     <View>
-      <Text style={{ color: 'blue', fontSize: 40 }}>{create}</Text>
-      <Text style={{ color: 'brown', fontSize: 40 }}>{data}</Text>
+      <Text style={{ color: 'blue', fontSize: 40 }}>
+        Props In React Native {name}
+      </Text>
+      <User name={name} />
+    </View>
+  );
+};
 
-      <Button title="Update The State!" onPress={testUpdate} />
+const User = (props: { name: string }) => {
+  console.log(props.name);
+  return (
+    <View style={{ backgroundColor: 'purple' }}>
+      <Text style={{ color: 'white', fontSize: 30 }}>{props.name}</Text>
     </View>
   );
 };
