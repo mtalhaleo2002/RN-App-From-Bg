@@ -1,25 +1,25 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import CompanyData from './components/CompanyData';
+import { Button, Text, View } from 'react-native';
 
 const App = () => {
+  let data = 22;
+  const fruit = (val: string) => {
+    data = 20;
+    console.log(data);
+    // console.log(val);
+    // console.log('Fruit Function Pressed');
+    // console.warn('Fruit Function Pressed');
+  };
   return (
     <View>
       <Text style={{ color: 'blue', fontSize: 40 }}>Components</Text>
-      <UserData />
-      <CompanyData />
-    </View>
-  );
-};
-
-const UserData = () => {
-  return (
-    <View>
-      <Text style={{ fontSize: 25 }}>Name: John Doe</Text>
-      <Text style={{ fontSize: 25 }}>Age: 32</Text>
-      <Text style={{ fontSize: 25 }}>Email: something@gmail.com</Text>
-      <CompanyData />
-      {/* Component Can be used in another component also */}
+      <Text style={{ color: 'orange', fontSize: 40 }}>{data}</Text>
+      <Button
+        title="Go to Company Data"
+        color={'brown'}
+        onPress={() => fruit('1st Button Called')}
+      />
+      <Button title="Check In" color={'green'} onPress={() => fruit('Hello')} />
     </View>
   );
 };
