@@ -1,27 +1,43 @@
-import React, { useState } from 'react';
-import { Button, Text, View } from 'react-native';
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import ExStyles from './style';
 
 const App = () => {
-  const [name, setName] = useState('Smith Johnson');
   return (
     <View>
-      <Text style={{ color: 'blue', fontSize: 40 }}>
-        Props In React Native {name}
+      <Text style={{ fontSize: 40, backgroundColor: 'purple', color: 'white' }}>
+        Style In React Native Text 1
       </Text>
-      <Button title="Change Name" onPress={() => setName('Batman')} />
-      <User name={name} age={29} />
+      <Text style={styles.textBox}>Style In Text 2</Text>
+      <Text style={ExStyles.textBox2}>Style In Text 3</Text>
+      <Text style={[styles.boxText, ExStyles.textBox2, { width: 300 }]}>
+        Style In Text 4
+      </Text>
     </View>
   );
 };
 
-const User = (props: { name: string; age: any }) => {
-  console.log(props.name);
-  return (
-    <View style={{ backgroundColor: 'purple' }}>
-      <Text style={{ color: 'white', fontSize: 30 }}>{props.name}</Text>
-      <Text style={{ color: 'white', fontSize: 30 }}>{props.age}</Text>
-    </View>
-  );
-};
+const styles = StyleSheet.create({
+  textBox: {
+    fontSize: 25,
+    backgroundColor: 'blue',
+    color: 'white',
+    height: 100,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    marginBottom: 20,
+    borderColor: 'green',
+    borderWidth: 5,
+    borderRadius: 10,
+  },
+  boxText: {
+    fontFamily: 'Arial',
+    marginTop: 10,
+    borderBottomColor: 'red',
+    borderBottomWidth: 5,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+});
 
 export default App;
