@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 const App = () => {
   const users = [
     {
@@ -18,19 +18,30 @@ const App = () => {
       name: 'Steve',
       id: 4,
     },
+    { name: 'Samantha', id: 5 },
+    { name: 'Paul', id: 6 },
+    { name: 'Laura', id: 7 },
+    { name: 'Tom', id: 8 },
+    { name: 'Diana', id: 9 },
+    { name: 'Lucy', id: 10 },
+    { name: 'Mark', id: 11 },
+    { name: 'Nina', id: 12 },
+    { name: 'Kevin', id: 13 },
+    { name: 'Olivia', id: 14 },
+    { name: 'Jake', id: 15 },
   ];
   return (
     <View>
       <Text style={{ fontSize: 25, backgroundColor: 'green', color: 'white' }}>
-        List with Flat List Component
+        List with Map Functions
       </Text>
-
-      <FlatList
-        data={users}
-        renderItem={({ item }) => (
-          <Text style={styles.itemBox}>{item.name}</Text>
-        )}
-      />
+      <ScrollView>
+        {users.map(userNo => (
+          <Text key={userNo.id} style={styles.itemBox}>
+            {userNo.name}
+          </Text>
+        ))}
+      </ScrollView>
     </View>
   );
 };
