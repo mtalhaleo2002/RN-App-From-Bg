@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import CompanyData from './components/CompanyData';
 
 const App = () => {
   return (
@@ -19,16 +20,6 @@ const UserData = () => {
       <Text style={{ fontSize: 25 }}>Email: something@gmail.com</Text>
       <CompanyData />
       {/* Component Can be used in another component also */}
-    </View>
-  );
-};
-
-const CompanyData = () => {
-  return (
-    <View>
-      <Text style={{ fontSize: 20 }}>Name: ABC Company</Text>
-      <Text style={{ fontSize: 20 }}>Total: 60 Employees </Text>
-      <Text style={{ fontSize: 20 }}>Product: XYZ Product</Text>
     </View>
   );
 };
