@@ -21,7 +21,7 @@ const App = () => {
       <TextInput
         placeholder="Enter User Name"
         onChangeText={text => setName(text)}
-        // value={name}
+        value={name}
         style={styles.textInput}
       />
 
