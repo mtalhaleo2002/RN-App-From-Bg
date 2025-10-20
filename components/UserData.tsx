@@ -1,8 +1,14 @@
 import { Text, View, StyleSheet } from 'react-native';
 
-const UserData = (props: {
-  insertItem: { id: number, name: string, email: string }, // That's the type for props
-}) => {
+interface UserDataProps {
+  insertItem: {
+    id: number;
+    name: string;
+    email: string;
+  };
+}
+
+const UserData = (props: UserDataProps) => {
   const item = props.insertItem;
 
   return (
