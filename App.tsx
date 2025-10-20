@@ -1,47 +1,100 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  FlatList,
+  useWindowDimensions,
+} from 'react-native';
 const App = () => {
   const users = [
     {
       id: 1,
-      name: 'Sam',
+      name: 'John',
+      email: 'abc@gmail.com',
     },
-    { id: 2, name: 'Anil' },
-    { id: 3, name: 'John' },
-    { id: 4, name: 'Doe' },
-    { id: 5, name: 'Sunny' },
-    { id: 6, name: 'Fing' },
-    { id: 7, name: 'Tony' },
-    { id: 8, name: 'Jago' },
-    { id: 9, name: 'Lara' },
-    { id: 10, name: 'Mia' },
+    {
+      id: 2,
+      name: 'Doe',
+      email: 'dez@gmail.com',
+    },
+    {
+      id: 3,
+      name: 'Smith',
+      email: 'fgh@gmail.com',
+    },
+    {
+      id: 4,
+      name: 'Brown',
+      email: 'ijk@gmail.com',
+    },
+    {
+      id: 5,
+      name: 'Davis',
+      email: 'lmn@gmail.com',
+    },
+    {
+      id: 6,
+      name: 'Miller',
+      email: 'opq@gmail.com',
+    },
+    {
+      id: 7,
+      name: 'Wilson',
+      email: 'rst@gmail.com',
+    },
+    {
+      id: 8,
+      name: 'Moore',
+      email: 'uvw@gmail.com',
+    },
+    {
+      id: 9,
+      name: 'Taylor',
+      email: 'xyz@gmail.com',
+    },
   ];
+
   return (
     <View>
       <Text style={{ fontSize: 25, backgroundColor: 'green', color: 'white' }}>
-        How To Make Grid
+        Component In Loop with Flatlist
       </Text>
       <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-        <Text style={styles.item}>Sam</Text>
-        {users.map(item => (
-          <Text style={styles.item}>{item.name}</Text>
-        ))}
+        <FlatList
+          data={users}
+          renderItem={({ item }) => <UserData insertItem={item} />}
+        />
       </View>
     </View>
   );
 };
 
+const UserData = (props: {
+  insertItem: { id: number; name: string; email: string };
+}) => {
+  const item = props.insertItem;
+
+  return (
+    <View style={styles.box}>
+      <Text style={styles.innerText}>{item.name}</Text>
+      <Text style={styles.innerText}>{item.email}</Text>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
-  item: {
-    fontSize: 25,
-    padding: 5,
-    backgroundColor: 'blue',
-    color: 'white',
-    margin: 5,
-    height: 120,
-    width: 120,
+  box: {
+    flexDirection: 'row',
+    borderColor: 'brown',
+    borderWidth: 2,
+    marginBottom: 10,
+  },
+  innerText: {
+    fontSize: 24,
+    color: 'purple',
+    flex: 1,
     textAlign: 'center',
-    textAlignVertical: 'center',
   },
 });
 
