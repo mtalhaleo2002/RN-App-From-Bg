@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  FlatList,
-  useWindowDimensions,
-} from 'react-native';
+import { Text, View, FlatList } from 'react-native';
+import UserData from './components/UserData';
+
 const App = () => {
   const users = [
     {
@@ -53,12 +49,17 @@ const App = () => {
       name: 'Taylor',
       email: 'xyz@gmail.com',
     },
+    {
+      id: 10,
+      name: 'Smith',
+      email: 'ddaz@gmail.com',
+    },
   ];
 
   return (
     <View>
       <Text style={{ fontSize: 25, backgroundColor: 'green', color: 'white' }}>
-        Component In Loop with Flatlist
+        Component In Loop with Flat List
       </Text>
       <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
         <FlatList
@@ -69,33 +70,5 @@ const App = () => {
     </View>
   );
 };
-
-const UserData = (props: {
-  insertItem: { id: number; name: string; email: string };
-}) => {
-  const item = props.insertItem;
-
-  return (
-    <View style={styles.box}>
-      <Text style={styles.innerText}>{item.name}</Text>
-      <Text style={styles.innerText}>{item.email}</Text>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  box: {
-    flexDirection: 'row',
-    borderColor: 'brown',
-    borderWidth: 2,
-    marginBottom: 10,
-  },
-  innerText: {
-    fontSize: 24,
-    color: 'purple',
-    flex: 1,
-    textAlign: 'center',
-  },
-});
 
 export default App;
