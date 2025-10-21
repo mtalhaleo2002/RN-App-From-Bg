@@ -1,74 +1,128 @@
 import React from 'react';
-import { Text, View, FlatList } from 'react-native';
-import UserData from './components/UserData';
+import {
+  Text,
+  View,
+  SectionList,
+  StyleSheet,
+  FlatList,
+  ScrollView,
+} from 'react-native';
 
 const App = () => {
   const users = [
     {
       id: 1,
       name: 'John',
-      email: 'abc@gmail.com',
+      data: ['php', 'laravel', 'codeigniter'],
     },
     {
       id: 2,
       name: 'Doe',
-      email: 'dez@gmail.com',
+      data: ['reactjs', 'react native', 'vuejs'],
     },
     {
       id: 3,
       name: 'Smith',
-      email: 'fgh@gmail.com',
-    },
-    {
-      id: 4,
-      name: 'Brown',
-      email: 'ijk@gmail.com',
-    },
-    {
-      id: 5,
-      name: 'Davis',
-      email: 'lmn@gmail.com',
-    },
-    {
-      id: 6,
-      name: 'Miller',
-      email: 'opq@gmail.com',
-    },
-    {
-      id: 7,
-      name: 'Wilson',
-      email: 'rst@gmail.com',
-    },
-    {
-      id: 8,
-      name: 'Moore',
-      email: 'uvw@gmail.com',
-    },
-    {
-      id: 9,
-      name: 'Taylor',
-      email: 'xyz@gmail.com',
-    },
-    {
-      id: 10,
-      name: 'Smith',
-      email: 'ddadadadz@gmail.com',
+      data: ['angular', 'nodejs', 'expressjs'],
     },
   ];
 
+  type FlatDataType =
+    | { type: 'header'; name: string }
+    | { type: 'item'; item: string };
+
+  const flatData: FlatDataType[] = users.flatMap(section => {
+    const header = { type: 'header' as const, name: section.name };
+    const items = section.data.map(tech => {
+      return { type: 'item' as const, item: tech };
+    });
+    return [header, ...items];
+  });
+
   return (
-    <View>
-      <Text style={{ fontSize: 25, backgroundColor: 'green', color: 'white' }}>
-        Component In Loop with Flat List
-      </Text>
-      <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+    <View style={{ marginTop: 50, flex: 1 }}>
+      <ScrollView>
+        <Text
+          style={{ fontSize: 25, backgroundColor: 'green', color: 'white' }}
+        >
+          Section List In React Native
+        </Text>
         <FlatList
-          data={users}
-          renderItem={({ item }) => <UserData insertItem={item} />}
+          data={flatData}
+          scrollEnabled={false}
+          keyExtractor={(item, index) => {
+            const key =
+              item.type === 'header'
+                ? `header-${item.name}-${index}`
+                : `item-${item.item}-${index}`;
+            return key;
+          }}
+          renderItem={({ item }) => {
+            if (item.type === 'header') {
+              return (
+                <Text
+                  style={{
+                    fontSize: 30,
+                    backgroundColor: 'pink',
+                    color: 'white',
+                  }}
+                >
+                  {item.name}
+                </Text>
+              );
+            } else {
+              return <Text style={styles.text}>{item.item}</Text>;
+            }
+          }}
         />
-      </View>
+
+        <SectionList
+          sections={users}
+          scrollEnabled={false}
+          renderItem={({ item }) => {
+            return <Text style={styles.text}>{item}</Text>;
+          }}
+          renderSectionHeader={({ section: { name } }) => {
+            return <Text style={styles.sectionHeader}>{name}</Text>;
+          }}
+        />
+
+        <Text
+          style={{ fontSize: 30, backgroundColor: 'orange', color: 'white' }}
+        >
+          Custom Mapping
+        </Text>
+        {users.map((section, index) => (
+          <View key={index}>
+            <Text
+              style={{ fontSize: 30, backgroundColor: 'blue', color: 'white' }}
+            >
+              {section.name}
+            </Text>
+            {section.data.map((tech, i) => (
+              <Text key={i} style={styles.text}>
+                {tech}
+              </Text>
+            ))}
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  sectionHeader: {
+    fontSize: 30,
+    backgroundColor: 'purple',
+    color: 'white',
+  },
+  text: {
+    fontSize: 20,
+    backgroundColor: 'lightgray',
+    paddingLeft: 10,
+    margin: 10,
+  },
+});
 
 export default App;

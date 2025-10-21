@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   innerText: {
     fontSize: 24,
     color: 'purple',
-    flex: 1,
+    flex: 3,
     textAlign: 'center',
   },
 });
