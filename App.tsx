@@ -1,18 +1,52 @@
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, Text, View, StyleSheet } from 'react-native';
 
 const App = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ backgroundColor: 'orange', flex: 1 }}>
-        <Text style={{ color: 'black', fontSize: 30, marginTop: 30 }}>
-          Responsive UI with Flex
-        </Text>
+    <View style={styles.container}>
+      <View style={styles.box1}>
+        <View style={styles.innerBox1}></View>
+        <View style={styles.innerBox2}></View>
+        <View style={styles.innerBox3}></View>
       </View>
-      <Button title="Click Me" />
-      <Button title="Click Me" />
+      <View style={styles.box2}></View>
+      <View style={styles.box3}></View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  box1: {
+    backgroundColor: 'violet',
+    flex: 2,
+    flexDirection: 'row',
+  },
+  box2: {
+    backgroundColor: 'seagreen',
+    flex: 1,
+  },
+  box3: {
+    backgroundColor: 'purple',
+    flex: 1,
+  },
+  innerBox1: {
+    backgroundColor: 'pink',
+    flex: 1,
+    margin: 5,
+  },
+  innerBox2: {
+    backgroundColor: 'green',
+    flex: 1,
+    margin: 5,
+  },
+  innerBox3: {
+    backgroundColor: 'red',
+    flex: 1,
+    margin: 5,
+  },
+});
 
 export default App;
