@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Text, View } from 'react-native';
 
 const App = () => {
@@ -6,22 +6,28 @@ const App = () => {
   return (
     <View>
       <Text style={{ color: 'black', fontSize: 30, marginTop: 30 }}>
-        Show Hide Component
+        useEffect For Unmount Component
       </Text>
-      <Button title="Show User Component" onPress={() => setShow(true)} />
-      <Button title="Hide User Component" onPress={() => setShow(false)} />{' '}
-      {/* Alternative to two buttons we can use single toggle button */}
-      <Button title="Toggle Component" onPress={() => setShow(!show)} />{' '}
-      {/* Toggle Button !show means if show is true make it false and vice versa. */}
-      {show ? <User /> : null}
+      <Button title="Toggle" onPress={() => setShow(!show)} />
+      {show ? <Student /> : null}
     </View>
   );
 };
 
-const User = () => {
+const Student = () => {
+  let timer = setInterval(() => {
+    console.warn('Timer Running');
+  }, 2000);
+  useEffect(() => {
+    // console.log('Student Component Mounted'); //This will run when component is mounted
+    return () => clearInterval(timer); // Whenever the component is unmounted the timer will be cleared
+    // {
+    //   console.log('UseEffect Of Student Component Unmounted');
+    // } //So this is how we can unmount a component using useEffect
+  });
   return (
     <View>
-      <Text style={{ color: 'purple', fontSize: 30 }}>User Component</Text>
+      <Text style={{ color: 'red', fontSize: 30 }}>Student</Text>
     </View>
   );
 };
