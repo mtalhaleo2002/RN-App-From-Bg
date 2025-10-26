@@ -1,22 +1,17 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Text, Button, Modal } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, Text, Pressable } from 'react-native';
 
 const App = () => {
-  const [showModal, setShowModal] = useState(false);
   return (
     <View style={styles.main}>
-      <Modal transparent={true} visible={showModal} animationType="slide">
-        <View style={styles.centerView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello This is Talha</Text>
-            <Button title="Close Modal" onPress={() => setShowModal(false)} />
-          </View>
-        </View>
-      </Modal>
-
-      <View style={styles.buttonView}>
-        <Button title="Open Modal" onPress={() => setShowModal(true)} />
-      </View>
+      <Pressable
+        onPress={() => console.warn('normal Press')}
+        onLongPress={() => console.warn('longPress open gya')}
+        onPressIn={() => console.warn('Press In')}
+        onPressOut={() => console.warn('Press Out')}
+      >
+        <Text style={styles.pressableBtn}>Pressable</Text>
+      </Pressable>
     </View>
   );
 };
@@ -25,27 +20,19 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: 'white',
-  },
-  buttonView: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  centerView: {
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
   },
-  modalView: {
-    backgroundColor: 'white',
-    padding: 55,
-    borderRadius: 20,
+  pressableBtn: {
+    backgroundColor: 'blue',
+    color: 'white',
+    padding: 10,
+    margin: 10,
+    marginTop: 40,
+    fontSize: 24,
+    textAlign: 'center',
     shadowColor: '#000',
-    elevation: 5,
-  },
-  modalText: {
-    fontSize: 30,
-    marginBottom: 20,
-    color: 'black',
+    elevation: 4,
+    borderRadius: 10,
   },
 });
 
