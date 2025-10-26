@@ -1,16 +1,24 @@
 import React from 'react';
-import { Button, Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableHighlight, Text } from 'react-native';
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.box1}>
-        <View style={styles.innerBox1}></View>
-        <View style={styles.innerBox2}></View>
-        <View style={styles.innerBox3}></View>
-      </View>
-      <View style={styles.box2}></View>
-      <View style={styles.box3}></View>
+      <TouchableHighlight>
+        <Text style={[styles.button, styles.primary]}>Primary</Text>
+      </TouchableHighlight>
+      <TouchableHighlight>
+        <Text style={[styles.button, styles.success]}>Success</Text>
+      </TouchableHighlight>
+      <TouchableHighlight>
+        <Text style={[styles.button, styles.warning]}>Warning</Text>
+      </TouchableHighlight>
+      <TouchableHighlight>
+        <Text style={[styles.button, styles.error]}>Error</Text>
+      </TouchableHighlight>
+      <TouchableHighlight>
+        <Text style={styles.button}>Button</Text>
+      </TouchableHighlight>
     </View>
   );
 };
@@ -18,34 +26,31 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 30,
   },
-  box1: {
-    backgroundColor: 'violet',
-    flex: 2,
-    flexDirection: 'row',
+  button: {
+    backgroundColor: 'blue',
+    fontSize: 24,
+    margin: 10,
+    padding: 10,
+    borderRadius: 10,
+    color: 'white',
+    textAlign: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 1,
+    elevation: 10,
   },
-  box2: {
-    backgroundColor: 'seagreen',
-    flex: 1,
+  primary: {
+    backgroundColor: 'blue',
   },
-  box3: {
-    backgroundColor: 'purple',
-    flex: 1,
-  },
-  innerBox1: {
-    backgroundColor: 'pink',
-    flex: 1,
-    margin: 5,
-  },
-  innerBox2: {
+  success: {
     backgroundColor: 'green',
-    flex: 1,
-    margin: 5,
   },
-  innerBox3: {
+  warning: {
+    backgroundColor: 'gold',
+  },
+  error: {
     backgroundColor: 'red',
-    flex: 1,
-    margin: 5,
   },
 });
 
