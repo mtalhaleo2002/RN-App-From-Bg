@@ -1,47 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Text, View } from 'react-native';
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const [data, setData] = useState(100);
-
-  // useEffect(() => {
-  //   console.log('Data is Updated');
-  // }, [data]); // only when data changes
-
-  // useEffect(() => {
-  //   console.log('Count is Updated');
-  // }, [count]); // only when count changes
-
+  const [show, setShow] = useState(true);
   return (
     <View>
       <Text style={{ color: 'black', fontSize: 30, marginTop: 30 }}>
-        useEffects as componentDidUpdate
+        Show Hide Component
       </Text>
-      {/* <Text style={{ color: 'purple', fontSize: 30 }}>Count: {count}</Text> */}
-      {/* <Text style={{ color: 'purple', fontSize: 30 }}>Data: {data}</Text> */}
-
-      <Button title="Update Counter" onPress={() => setCount(count + 1)} />
-      <Button title="Update Counter" onPress={() => setData(data + 1)} />
-      <User info={{ count, data }} />
+      <Button title="Show User Component" onPress={() => setShow(true)} />
+      <Button title="Hide User Component" onPress={() => setShow(false)} />{' '}
+      {/* Alternative to two buttons we can use single toggle button */}
+      <Button title="Toggle Component" onPress={() => setShow(!show)} />{' '}
+      {/* Toggle Button !show means if show is true make it false and vice versa. */}
+      {show ? <User /> : null}
     </View>
   );
 };
 
-const User = (props: any) => {
-  // console.log(props.info.count);
-
-  useEffect(() => {
-    console.log('Call when data props will change');
-  }, [props.info.data]);
+const User = () => {
   return (
     <View>
-      <Text style={{ color: 'purple', fontSize: 30 }}>
-        Count: {props.info.count}
-      </Text>
-      <Text style={{ color: 'purple', fontSize: 30 }}>
-        Data: {props.info.data}
-      </Text>
+      <Text style={{ color: 'purple', fontSize: 30 }}>User Component</Text>
     </View>
   );
 };
