@@ -7,8 +7,24 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home 1st Screen" component={Home} />
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: { backgroundColor: '#c51faeff' },
+          headerTintColor: '#fff',
+          headerTitleStyle: { fontWeight: 'bold', fontSize: 25 },
+        }} // This is the approach to style all the screens at once
+      >
+        <Stack.Screen
+          name="Home 1st Screen"
+          component={Home}
+          options={{
+            title: 'My Home',
+            headerStyle: { backgroundColor: '#f4511e' },
+            headerTintColor: '#d8c5c5ff',
+            headerTitleStyle: { fontWeight: 'bold', fontSize: 25 },
+            headerShown: true,
+          }}
+        />
         <Stack.Screen name="Login 2nd Screen" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
