@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, StatusBar, Text, Button } from 'react-native';
+import { View, StyleSheet, Text, Button, Platform } from 'react-native';
 
 const App = () => {
-  const [hide, setHide] = useState(false);
-  const [barStyle, setBarStyle] = useState('default');
   return (
     <View style={styles.main}>
-      <StatusBar
-        backgroundColor={'green'}
-        barStyle={'default'} // Bar - Style means font color of status bar is white or dark
-        hidden={hide}
-      />
-      <Button title="Toggle Status Bar" onPress={() => setHide(!hide)} />
-      <Button
-        title="Update Style For Status Bar"
-        onPress={() => setBarStyle('dark-content')}
-      />
+      <Text style={styles.mainText}>Platform :{Platform.OS}</Text>
+      {Platform.OS == 'android' ? (
+        <View
+          style={{ height: 100, width: 100, backgroundColor: 'blue' }}
+        ></View>
+      ) : (
+        <View
+          style={{ height: 100, width: 100, backgroundColor: 'green' }}
+        ></View>
+      )}
+
+      <Text style={styles.text}>Code Logically</Text>
+      <Text style={styles.text}>
+        {JSON.stringify(Platform.constants.reactNativeVersion.minor)}
+      </Text>
+      <Text style={styles.text}>
+        {JSON.stringify(Platform.constants.reactNativeVersion)}
+      </Text>
+      <Text style={styles.text}>{JSON.stringify(Platform.constants)}</Text>
     </View>
   );
 };
@@ -26,6 +33,15 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 30,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mainText: {
+    fontSize: 24,
+    color: 'white',
+  },
+  text: {
+    fontSize: 30,
+    color: Platform.OS === 'android' ? 'purple' : 'red',
   },
 });
 
