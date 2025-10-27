@@ -1,47 +1,55 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Button, Text } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [show, setShow] = useState(false);
-
   return (
-    <View style={styles.container}>
-      {show ? (
-        <View style={styles.modal}>
-          <View style={styles.subModalBody}>
-            <Text>Content above the button</Text>
-          </View>
-          <Button title="Close Dialog" onPress={() => setShow(false)} />
-        </View>
-      ) : null}
-
-      <Button title="Open Dialog" onPress={() => setShow(true)} />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home 1st Screen" component={Home} />
+        <Stack.Screen name="Login 2nd Screen" component={Login} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    // alignItems: 'center',
-  },
-  modal: {
-    flex: 1,
-    backgroundColor: 'rgba(50,50,50,0.5)',
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  subModalBody: {
-    backgroundColor: 'white',
-    width: 300,
-    height: 200,
-    padding: 30,
-    marginBottom: 20,
-    borderRadius: 10,
-    justifyContent: 'center',
-  },
-});
+const Home = (props: any) => {
+  return (
+    <View
+      style={{
+        backgroundColor: 'white',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Text style={{ fontSize: 30 }}>Welcome to the Home Screen</Text>
+      <Button
+        title="Login"
+        onPress={() => props.navigation.navigate('Login 2nd Screen')}
+      />
+    </View>
+  );
+};
+const Login = (props: any) => {
+  return (
+    <View
+      style={{
+        backgroundColor: 'white',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Text style={{ fontSize: 30 }}>Login Screen</Text>
+      <Button
+        title="Go To Home"
+        onPress={() => props.navigation.navigate('Home 1st Screen')}
+      />
+    </View>
+  );
+};
 
 export default App;
