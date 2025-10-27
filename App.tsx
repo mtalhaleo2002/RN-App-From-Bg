@@ -1,38 +1,31 @@
-import React from 'react';
-import { View, StyleSheet, Text, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, StatusBar, Text, Button } from 'react-native';
 
 const App = () => {
+  const [hide, setHide] = useState(false);
+  const [barStyle, setBarStyle] = useState('default');
   return (
     <View style={styles.main}>
-      <Pressable
-        onPress={() => console.warn('normal Press')}
-        onLongPress={() => console.warn('longPress open gya')}
-        onPressIn={() => console.warn('Press In')}
-        onPressOut={() => console.warn('Press Out')}
-      >
-        <Text style={styles.pressableBtn}>Pressable</Text>
-      </Pressable>
+      <StatusBar
+        backgroundColor={'green'}
+        barStyle={'default'} // Bar - Style means font color of status bar is white or dark
+        hidden={hide}
+      />
+      <Button title="Toggle Status Bar" onPress={() => setHide(!hide)} />
+      <Button
+        title="Update Style For Status Bar"
+        onPress={() => setBarStyle('dark-content')}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   main: {
+    backgroundColor: 'orange',
     flex: 1,
-    backgroundColor: 'white',
+    marginTop: 30,
     justifyContent: 'center',
-  },
-  pressableBtn: {
-    backgroundColor: 'blue',
-    color: 'white',
-    padding: 10,
-    margin: 10,
-    marginTop: 40,
-    fontSize: 24,
-    textAlign: 'center',
-    shadowColor: '#000',
-    elevation: 4,
-    borderRadius: 10,
   },
 });
 
