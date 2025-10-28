@@ -17,6 +17,7 @@ export const Login = (props: any) => {
       <Text style={{ fontSize: 30 }}>Login Screen</Text>
       <Text style={{ fontSize: 30 }}>Name: {userName}</Text>
       <Text style={{ fontSize: 30 }}>Age: {age}</Text>
+      <Text style={{ fontSize: 30 }}>ID: {userId}</Text>
       <Button
         title="Go To Home"
         onPress={() => props.navigation.navigate('Home 1st Screen')}

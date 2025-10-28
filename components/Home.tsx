@@ -2,6 +2,9 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 
 export const Home = (props: any) => {
+  const userName = 'John Doe';
+  const age = 30;
+  const userId = 12345;
   return (
     <View
       style={{
@@ -18,9 +21,9 @@ export const Home = (props: any) => {
         title="Login"
         onPress={() =>
           props.navigation.navigate('Login 2nd Screen', {
-            userName: 'JohnDoe',
-            age: 29,
-            userId: 12345,
+            userName,
+            age,
+            Id: userId,
           })
         }
       />
