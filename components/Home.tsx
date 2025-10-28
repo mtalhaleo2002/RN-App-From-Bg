@@ -16,7 +16,13 @@ export const Home = (props: any) => {
       </Text>
       <Button
         title="Login"
-        onPress={() => props.navigation.navigate('Login 2nd Screen')}
+        onPress={() =>
+          props.navigation.navigate('Login 2nd Screen', {
+            userName: 'JohnDoe',
+            age: 29,
+            userId: 12345,
+          })
+        }
       />
     </View>
   );
