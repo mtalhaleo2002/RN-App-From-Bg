@@ -9,8 +9,11 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-const Stack = createNativeStackNavigator();
+import { Header } from './components/Header';
+import { Home } from './components/Home';
+import { Login } from './components/Login';
 
+const Stack = createNativeStackNavigator();
 const App = () => {
   const headerAction = () => {
     console.log('Header button pressed');
@@ -98,57 +101,6 @@ const App = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
-  );
-};
-
-const Header = () => {
-  return (
-    <TextInput
-      placeholder="Enter Your Destination"
-      style={{
-        backgroundColor: 'white',
-        borderRadius: 30,
-        paddingHorizontal: 10,
-      }}
-    />
-  );
-  // <Button title="Header Btn" />;
-};
-
-const Home = (props: any) => {
-  return (
-    <View
-      style={{
-        backgroundColor: 'white',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Text style={{ fontSize: 30 }}>Welcome to the Home Screen</Text>
-      <Button
-        title="Login"
-        onPress={() => props.navigation.navigate('Login 2nd Screen')}
-      />
-    </View>
-  );
-};
-const Login = (props: any) => {
-  return (
-    <View
-      style={{
-        backgroundColor: 'white',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Text style={{ fontSize: 30 }}>Login Screen</Text>
-      <Button
-        title="Go To Home"
-        onPress={() => props.navigation.navigate('Home 1st Screen')}
-      />
-    </View>
   );
 };
 
