@@ -1,46 +1,32 @@
-import React, { useState } from 'react';
-import { View, Text, Button, TextInput } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import React, { useEffect, useState } from 'react';
+import { View, Text } from 'react-native';
 
-const Tab = createMaterialTopTabNavigator();
 const App = () => {
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Login" component={Login} />
-          <Tab.Screen name="Sign Up" component={SignUp} />
-          <Tab.Screen name="Other" component={Other} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
-  );
-};
+  const [data, setData] = useState(undefined);
 
-// If you get an error here try npm start --clean-cache or yarn start --reset-cache.Basically clear the metro bundler cache.And also restart the development server.
+  const getAPIData = async () => {
+    const url = 'https://jsonplaceholder.typicode.com/posts/1';
+    let result = await fetch(url);
+    result = await result.json();
+    setData(result);
+  };
 
-const Login = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 30 }}>Login</Text>
-    </View>
-  );
-};
+  useEffect(() => {
+    getAPIData();
+  }, []);
 
-const SignUp = () => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 30 }}>Sign Up</Text>
-    </View>
-  );
-};
+    <View style={{ marginTop: 50, alignItems: 'center' }}>
+      <Text style={{ fontSize: 30 }}>API Call</Text>
 
-const Other = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 30 }}>Other</Text>
+      {data ? (
+        <View>
+          <Text style={{ fontSize: 30 }}>{data.id}</Text>
+          <Text style={{ fontSize: 30 }}>{data.userId}</Text>
+          <Text style={{ fontSize: 30 }}>{data.title}</Text>
+          <Text style={{ fontSize: 30 }}>{data.body}</Text>
+        </View>
+      ) : null}
     </View>
   );
 };
