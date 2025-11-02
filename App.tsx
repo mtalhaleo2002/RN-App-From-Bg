@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
 const App = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Post[] | null>([]);
   const getAPIData = async () => {
     const url = 'https://jsonplaceholder.typicode.com/posts';
     let result = await fetch(url);
-    result = await result.json();
+    const response: Post[] = await result.json();
     console.log(result);
-    setData(result);
+    setData(response);
   };
 
   useEffect(() => {
@@ -18,7 +25,7 @@ const App = () => {
     <View style={{ marginTop: 50 }}>
       <Text style={{ fontSize: 30 }}>FlatList With API Data</Text>
 
-      {data.length ? (
+      {data?.length ? (
         <FlatList
           data={data}
           renderItem={({ item }) => (
