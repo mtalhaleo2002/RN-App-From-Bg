@@ -1,41 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-
-// Define the shape of the data coming from the API
-interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
+import { View, Text, FlatList } from 'react-native';
 
 const App = () => {
-  // Use the type in useState
-  const [data, setData] = useState<Post | null>(null);
-
+  const [data, setData] = useState([]);
   const getAPIData = async () => {
-    const url = 'https://jsonplaceholder.typicode.com/posts/1';
-    const response = await fetch(url);
-    const result: Post = await response.json();
+    const url = 'https://jsonplaceholder.typicode.com/posts';
+    let result = await fetch(url);
+    result = await result.json();
+    console.log(result);
     setData(result);
   };
 
   useEffect(() => {
     getAPIData();
   }, []);
-
   return (
-    <View style={{ marginTop: 50, alignItems: 'center' }}>
-      <Text style={{ fontSize: 30 }}>API Call</Text>
+    <View style={{ marginTop: 50 }}>
+      <Text style={{ fontSize: 30 }}>FlatList With API Data</Text>
 
-      {data && (
-        <View>
-          <Text style={{ fontSize: 30 }}>{data.title}</Text>
-          <Text style={{ fontSize: 30 }}>{data.userId}</Text>
-          <Text style={{ fontSize: 30 }}>{data.id}</Text>
-          <Text style={{ fontSize: 30 }}>{data.body}</Text>
-        </View>
-      )}
+      {data.length ? (
+        <FlatList
+          data={data}
+          renderItem={({ item }) => (
+            <View
+              style={{
+                borderBottomColor: 'orange',
+                borderBottomWidth: 2,
+                padding: 10,
+              }}
+            >
+              <Text style={{ fontSize: 30, backgroundColor: 'gray' }}>
+                {item.id}
+              </Text>
+              <Text style={{ fontSize: 24 }}>{item.title}</Text>
+              <Text style={{ fontSize: 18 }}>{item.body}</Text>
+            </View>
+          )}
+        />
+      ) : null}
     </View>
   );
 };
