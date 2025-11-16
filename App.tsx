@@ -13,7 +13,7 @@ const App = () => {
 
   const getAPIData = async () => {
     console.log('API Call');
-    const url = 'http://10.0.2.2:3000/users'; // Emulator ke liye 100% correct
+    const url = 'http://192.168.100.85:3000/users'; // Physical Device ke liye 100% correct
     let result = await fetch(url);
     const json: User[] = await result.json();
     console.log(json);
