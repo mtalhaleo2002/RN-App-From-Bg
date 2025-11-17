@@ -1,53 +1,86 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button, ScrollView } from 'react-native';
+
+type User = {
+  id: number;
+  name: string;
+  age: number;
+  email: string;
+};
 
 const App = () => {
-  const [data, setData] = useState<User[]>([]);
-
-  type User = {
-    id: number;
-    name: string;
-    age: number;
-    email: string;
+  const [users, setUsers] = useState<User[]>([]);
+  const getUsers = async (): Promise<void> => {
+    try {
+      const response = await fetch('http://192.168.2.9:3000/users');
+      const json: User[] = await response.json();
+      setUsers(json);
+    } catch (error) {
+      console.log('Fetch Error:', error);
+    }
   };
 
-  const getAPIData = async () => {
-    console.log('API Call');
-    const url = 'http://192.168.100.85:3000/users'; // Physical Device ke liye 100% correct
-    let result = await fetch(url);
-    const json: User[] = await result.json();
-    console.log(json);
-    setData(json);
+  const getNextId = (): number => {
+    if (users.length === 0) return 1;
+
+    const numericIds = users.map(u => Number(u.id)).filter(n => !isNaN(n));
+
+    return Math.max(...numericIds) + 1;
+  };
+
+  const addUser = async (): Promise<void> => {
+    const newUser: User = {
+      id: getNextId(),
+      name: 'Charlie',
+      age: 28,
+      email: 'abc@xyz.com',
+    };
+
+    try {
+      const response = await fetch('http://192.168.2.9:3000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newUser),
+      });
+
+      const result: User = await response.json();
+      console.log('Saved:', result);
+
+      getUsers();
+    } catch (error) {
+      console.log('Post Error:', error);
+    }
   };
 
   useEffect(() => {
-    getAPIData();
+    getUsers();
   }, []);
+
   return (
-    <View
-      style={{
-        paddingTop: 50,
-        backgroundColor: 'white',
-      }}
-    >
-      <Text style={{ fontSize: 30 }}>Call JSON Server API</Text>
-      {data.map(item => (
+    <ScrollView style={{ paddingTop: 50, backgroundColor: '#f0f0f0' }}>
+      <Text style={{ fontSize: 30 }}>Custom Auto ID (TypeScript Safe)</Text>
+
+      <Button title="Add User" onPress={addUser} />
+
+      {users.map(user => (
         <View
-          key={item.id}
+          key={user.id}
           style={{
-            borderWidth: 1,
-            borderColor: 'grey',
             margin: 10,
+            borderWidth: 1,
             padding: 10,
+            borderColor: 'grey',
           }}
         >
-          <Text>ID: {item.id}</Text>
-          <Text>Name: {item.name}</Text>
-          <Text>Age: {item.age}</Text>
-          <Text>Email: {item.email}</Text>
+          <Text>ID: {user.id}</Text>
+          <Text>Name: {user.name}</Text>
+          <Text>Age: {user.age}</Text>
+          <Text>Email: {user.email}</Text>
         </View>
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
